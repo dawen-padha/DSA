@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include "solution.h"
+using namespace std;
+
+int main(){
+    int num;
+    cin >> num;
+
+    printKeypad(num);
+
+    return 0;
+}
+void keypad(int num,string output)
+{
+string mapping[] = {"", "", "abc", "def","ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+    if(num<=1)
+    {
+        cout<<output<<endl;
+        return ;
+    }
+    int n=num%10;
+    string input=mapping[n];
+     for(int i=0;i<input.size();i++){
+        keypad(num/10,input[i]+output);
+    }
+}
+void printKeypad(int num){
+    keypad(num,"");
+}
