@@ -1,0 +1,54 @@
+//Dijkstra's Algotirm
+
+
+#include <bits/stdc++.h>
+#include<climits>
+using namespace std;
+int findminv(vector<int> &distance,int v,vector<bool> &visited)
+{
+    int minv=-1;
+    for(int i=0;i<v;i++)
+        {
+            if(!visited[i] && (minv== -1 ||  distance[i] < distance[minv])){
+			minv = i;
+		}
+        }
+    return minv;
+}
+void dijkstra(vector<vector<int>> &edges,int v)
+{
+  vector<int> distance(v,INT_MAX);
+    vector<bool> visited(v,0);
+    distance[0]=0;
+    for(int i=0;i<v-1;i++)
+    {
+        int minv=findminv(distance,v,visited);
+        visited[minv]=true;
+        for(int j=0;j<v;j++)
+        {
+            if(edges[minv][j]!=0&&!visited[j])
+            {
+                int dist = distance[minv] + edges[minv][j];
+				if(dist < distance[j]){
+					distance[j] = dist;
+                }
+            }
+        }
+    }
+        for(int i = 0; i < v; i++){
+		cout << i << " " << distance[i] << endl;
+	}
+}
+int main() {
+   int v,e;
+    cin>>v>>e;
+  vector<vector<int>> edges(v,vector<int>(v,0));
+    for(int i=0;i<e;i++)
+    {
+        int f,s,weight;
+        cin>>f>>s>>weight;
+        edges[s][f]=weight;
+        edges[f][s]=weight;
+    }
+    dijkstra(edges,v);
+}
