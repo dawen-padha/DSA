@@ -1,0 +1,52 @@
+// this code returns the middle node of the linked list , in case of even no no nodes, it returns the second node.
+//the count function written here is to be kept in mind.
+**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+// funtion to count the no of nodes
+    int helpcount(ListNode* head)
+    {
+        if(head==NULL) return 0;
+        int c=0;
+        while(head!=NULL)
+        {
+            c++;
+            head=head->next;
+        }
+        return c;
+    }
+    ListNode* middleNode(ListNode* head) {
+        ListNode* temp=head;
+        if(head==NULL) return head;
+        int count=helpcount(head);
+        if(count&1) 
+        {
+            int a=count/2;
+            while(a)
+            {
+                a--;
+                temp=temp->next;
+            }
+            return temp;
+        }
+        else
+        {
+            int b=count/2;
+            while(b)
+            {
+                b--;
+                temp=temp->next;
+            }
+            return temp;
+        }
+    }
+};
