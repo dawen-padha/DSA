@@ -37,7 +37,7 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     bool dfs(int idx,int prev,vector<int> adj[],vector<int>&visited){
-        visited[idx]=1;
+         if(!visited[idx]) visited[idx]=1;
             for(auto i:adj[idx]){
                 if(!visited[i]){
                     if(dfs(i,idx,adj,visited)) return true;
