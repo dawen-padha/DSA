@@ -86,3 +86,39 @@ int main() {
     return 0;
 }
 // } Driver Code Ends
+
+// depth first search approach 
+//
+//
+//
+//
+class Solution
+{
+	public:
+	//Function to return list containing vertices in Topological order. 
+	void dfs(stack<int>&s, vector<bool>&visited, vector<int> adj[],int idx){
+             visited[idx]=1;
+            for(auto i:adj[idx]){
+                if(!visited[i]){
+                    dfs(s,visited,adj,i);
+                }
+            }
+            s.push(idx);
+	}
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    stack<int> s;
+	    vector<bool> visited(V,0);
+	    for(int i=0;i<V;i++){
+	        if(!visited[i]){
+	            dfs(s,visited,adj,i);
+	        }
+	    }
+	    vector<int> v;
+	    while(s.size()){
+	        v.push_back(s.top());
+	        s.pop();
+	    }
+	    return v;
+	}
+};
